@@ -43,8 +43,7 @@ class RR:
                     canvas.delete(data[0])
                     self.logger('"{}" выполнен'.format(data[2]))
             except Empty:
-                pass
-
+                break
 
 if __name__ == '__main__':
     root = Tk()
