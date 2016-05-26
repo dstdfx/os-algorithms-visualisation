@@ -148,17 +148,18 @@ class MultilevelQueue:
     def __init__(self):
         canvas.create_text(40, 550, text="Multilevel queue", anchor='w', font="Helvetica 16")
         self.alg_title = canvas.create_text(670, 550, text="", anchor='w', font="Helvetica 16")
-        canvas.create_rectangle(10, 30, 220, 520, outline='red', width=3)
+        canvas.create_rectangle(10, 30, 250, 520, outline='red', width=3)
         canvas.pack()
         self.random_algorithms = [('FCFS', _FCFS), ('RR', _RR), ('SJF', _SJF)]
-        self.proces_q = ['red', 'green', 'brown', 'blue', 'yellow', 'purple', 'grey', 'orange', 'white', 'pink']
+        self.proces_q = ['grey', 'grey', 'grey', 'white', 'white', 'white', 'blue', 'blue', 'blue', 'blue']
+        self.process_types = {'grey': 'Системный', 'white': 'Фоновый', 'blue': 'Пользоват-ий'}
         self.data_queue = PriorityQueue()
-        self.x, self.y, self.x0, self.y0 = 35, 60, 20, 210
-        self.text_x, self.text_y = 110, 45
+        self.x, self.y, self.x0, self.y0 = 35, 60, 20, 240
+        self.text_x, self.text_y = 130, 45
         self.log_x, self.log_y = 420, 25
 
     def logger(self, log):
-        canvas.create_text(self.log_x, self.log_y, text=log, font="Helvetica 12")
+        canvas.create_text(self.log_x, self.log_y, text=log, font="Helvetica 11")
         canvas.update()
         self.log_y += 20
 
@@ -167,7 +168,7 @@ class MultilevelQueue:
             time.sleep(0.1)
             element = canvas.create_rectangle([self.x0, self.x], [self.y0, self.y], fill=c)
             current_algorithm = choice(self.random_algorithms)
-            text_to_p = '{} "{}" с приоритетом {}'.format(current_algorithm[0], c, index)
+            text_to_p = '{} {} с приоритетом {}'.format(current_algorithm[0], self.process_types[c], index)
             el_text = canvas.create_text(self.text_x, self.text_y, text=text_to_p)
             canvas.update()
             self.data_queue.put((element, current_algorithm, {'x0': self.x0, 'x': self.x, 'y0': self.y0, 'y': self.y}, c,
