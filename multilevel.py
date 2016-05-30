@@ -10,11 +10,6 @@ from round_robin import RR
 from shortest_job_first import SJF
 
 
-root = Tk()
-canvas = Canvas(root, width=800, height=600)
-canvas.pack()
-
-
 class _FCFS(FCFS):
     def __init__(self):
         super(_FCFS, self).__init__()
@@ -192,13 +187,19 @@ class MultilevelQueue:
                 pass
 
 
-multi = MultilevelQueue()
-t_producer = threading.Thread(target=multi.producer)
-t_producer.daemon = True
-t_producer.start()
+if __name__ == '__main__':
 
-t_consumer = threading.Thread(target=multi.consumer)
-t_consumer.daemon = True
-t_consumer.start()
+    root = Tk()
+    canvas = Canvas(root, width=800, height=600)
+    canvas.pack()
 
-root.mainloop()
+    multi = MultilevelQueue()
+    t_producer = threading.Thread(target=multi.producer)
+    t_producer.daemon = True
+    t_producer.start()
+
+    t_consumer = threading.Thread(target=multi.consumer)
+    t_consumer.daemon = True
+    t_consumer.start()
+
+    root.mainloop()
